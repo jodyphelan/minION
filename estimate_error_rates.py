@@ -24,6 +24,9 @@ def run_cmd(cmd,verbose=False):
 	quit()
 
 
+if len(sys.argv)!=3:
+	print "python estimate_error_rates.py <ref.fa> <sample.bam>"
+	quit()
 
 ref = sys.argv[1]
 bam = sys.argv[2]

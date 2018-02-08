@@ -4,6 +4,10 @@ import gzip
 import datetime
 import re
 
+if len(sys.argv)!=2:
+	print "python model_time.py <fastq>"
+	quit()
+
 fastq = sys.argv[1]
 prefix = fastq.split("/")[-1].split(".fastq")[0]
 IN = gzip.open(fastq)

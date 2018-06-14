@@ -1,3 +1,4 @@
+library(scales)
 library(drc)
 library(data.table)
 dat<-as.data.frame(fread("all_samples.time_cov.txt"))
@@ -8,7 +9,7 @@ cols<-rainbow(4)
 xlims<-c(0,max(dat$time))
 ylims<-c(0,max(dat$cov))
 pdf("cov_vs_time.pdf")
-plot(1,1,type="n",xlim=xlims,ylim=ylims)
+plot(1,1,type="n",xlim=xlims,ylim=ylims,xlab="Time (Hours)",ylab="Coverage")
 batch_type<-c()
 km<-c()
 for (x in unique(dat$sample)){
@@ -24,8 +25,10 @@ for (x in unique(dat$sample)){
   batch_type<-c(batch_type,b)
   km<-c(km,coef(model)[2])
 }
+legend("bottomright",legend=batches,fill=rainbow(4))
 dev.off()
+
 pdf("flow_cell_half_life.pdf")
-boxplot(km ~ batch_type,ylab="Flow cell half-life")
+boxplot(km ~ batch_type,ylab="Flow cell half-life",col=alpha(rainbow(4),0.5))
 dev.off()
 
